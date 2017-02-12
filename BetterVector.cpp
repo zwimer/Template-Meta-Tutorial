@@ -117,8 +117,6 @@ template<> void printVectorHelper<NullType>() {}
 	std::cout  << std::endl;				\
 }
 
-#define nameRow(N) row_##N
-
 //Print a vector
 template<class V> void printMatrixHelper() {
 	std::cout << "  [ ";
@@ -151,7 +149,7 @@ int main() {
 	pntV(A1); pntV(A2); pntV(A3);
 	std::cout << std::endl;
 
-	//Print A and B
+	//Print A
 	pntM(A);
 
     //Dot product of the first and second row of A
