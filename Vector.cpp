@@ -116,7 +116,7 @@ int main() {
 	pnt(A); pnt(B);
 
 	//Dot product
-	std::cout << dotProd(A, B) << std::endl;
+	std::cout << "\nA • B = " << dotProd(A, B) << std::endl;
 
 	//Success
 	return 0;

@@ -29,7 +29,7 @@ template<int N> struct intc { enum { value = N }; };
 #define get(T, N) ListGet<T,N>::result
 
 
-//A vector of types
+//A list of types
 template <class T, class ... U> struct List {
 	typedef List<U...> Tail;
 	typedef T Head;
@@ -86,7 +86,7 @@ template <> struct dotProd<NullType, NullType> { enum { result = 0 }; };
 
 
 //Print wrapper
-#define pnt(V) {							\
+#define pntV(V) {							\
 	std::cout << #V << " = [ ";				\
 	if (V::size) printVectorHelper<V>();	\
 	std::cout << "]" << std::endl;			\
@@ -103,6 +103,33 @@ template<class V> void printVectorHelper() {
 template<> void printVectorHelper<NullType>() {}
 
 
+/****************************************************************/
+/*																*/
+/*						For matrix printing						*/
+/*																*/
+/****************************************************************/
+
+
+//Print wrapper
+#define pntM(V) {							\
+	std::cout << #V << ":\n";				\
+	if (V::size) printMatrixHelper<V>();	\
+	std::cout  << std::endl;				\
+}
+
+#define nameRow(N) row_##N
+
+//Print a vector
+template<class V> void printMatrixHelper() {
+	std::cout << "  [ ";
+	if (V::size) printVectorHelper<typename V::Head>();
+	std::cout << "]" << std::endl;
+	printMatrixHelper<typename V::Tail>();
+}
+
+//Called when there is nothing left to print
+template<> void printMatrixHelper<NullType>() {}
+
 
 /****************************************************************/
 /*																*/
@@ -114,19 +141,21 @@ template<> void printVectorHelper<NullType>() {}
 //Main function
 int main() {
 
-	//Initial vectors
-	makeList(A_1, intc<1>, intc<2>, intc<3>);
-	makeList(A_2, intc<4>, intc<5>, intc<6>);
-	makeList(A_3, intc<7>, intc<8>, intc<9>);
-	makeList(A, A_1, A_2, A_3);
-	//TODO: better wrapper
-	//makeIntList(B, 6, 5, 4, 3, 2, 1);
+	//Make matrix A
+	makeList(A1, intc<1>, intc<2>, intc<3>);
+	makeList(A2, intc<4>, intc<5>, intc<6>);
+	makeList(A3, intc<7>, intc<8>, intc<9>);
+	makeList(A, A1, A2, A3);
 
-	//Print the maticies
-	pnt(A_1); 
+	//Print the rows of A
+	pntV(A1); pntV(A2); pntV(A3);
+	std::cout << std::endl;
 
-	//Dot product
-	std::cout << dotProd(A_1, A_2) << std::endl;
+	//Print A and B
+	pntM(A);
+
+    //Dot product of the first and second row of A
+    std::cout << "A1 • A2 = " << dotProd(A1, A2) << std::endl;
 
 	//Success
 	return 0;
