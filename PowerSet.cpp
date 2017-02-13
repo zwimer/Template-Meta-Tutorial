@@ -1,5 +1,12 @@
 #include <iostream>
+#include <chrono>
 
+#define BUILD_NUM_TIMES 1000
+
+
+/* Compile with:
+g++ PowerSet.cpp -Wall -Ofast -std=c++14 -Wno-enum-compare -ftemplate-depth=1000000 -frename-registers -march=native -fomit-frame-pointer -fmerge-all-constants -o PowerSet.out
+*/
 
 /****************************************************************/
 /*																*/
@@ -8,7 +15,7 @@
 /****************************************************************/
 
 
-//Empty type
+//Null type
 class NullType {};
 
 //A container that converts an int to a distinct type, with a value
@@ -118,11 +125,12 @@ public: typedef NullType result;
 /****************************************************************/
 
 
+//Make_power_set wrapper
 #define PowerSet(A) make_power_set<A>::result
 
 //A struct representing an empty set
 struct EmptySet {
-	static void print() { std::cout << "{}"; }
+	static void print() {}
 };
 
 //Prepend P to sublists of L
@@ -192,7 +200,7 @@ template<> void printVectorHelper<NullType>() {}
 template<class V> void printMatrixHelper() {
 	std::cout << "  [ ";
 	if (V::size) printVectorHelper<typename V::Head>();
-	std::cout << "]" << std::endl;
+	std::cout << "]\n";
 	printMatrixHelper<typename V::Tail>();
 }
 
@@ -202,27 +210,55 @@ template<> void printMatrixHelper<NullType>() {}
 
 /****************************************************************/
 /*																*/
-/*								Main 							*/
+/*							Run-Time							*/
 /*																*/
 /****************************************************************/
 
 
-//Main function
-int main() {
+//Run the program
+inline void buildSet(const bool p) {
 
 	//Make list A
-	typedef makeList(
-		intc<1>, intc<2>, intc<3>, intc<4>,
-		intc<5>, intc<6>, intc<7>, intc<8>,
-		intc<9>, intc<10>, intc<11>, intc<12>
-) A;
-//		intc<13>, intc<14>, intc<15>, intc<16>,
+	typedef makeList( intc<0>, intc<1>, intc<2>, intc<3>, intc<4>,
+		intc<5>, intc<6>, intc<7>, intc<8>, intc<9>, intc<10> ) A;
 
 	//Make the power set of A
 	typedef PowerSet(A) B;
 
-	//Print the power set
-	pntM(B);
+	//Print B if requested
+	if (p) pntM(B);
+}
+
+//Get the current time
+static inline __attribute__((always_inline)) auto time() {
+	return std::chrono::high_resolution_clock::now();
+}
+
+//Print the current time
+static inline __attribute__((always_inline)) int getTime(auto t) { 
+	using namespace std; using namespace chrono;
+	return duration_cast<microseconds>(t).count();
+}
+
+//Main function
+int main() {
+
+	//Create time variables
+	auto s = time(), e = time();
+	int time1;
+
+	//Create the set n times, and time it
+	const int n = BUILD_NUM_TIMES; s = time();
+	for(int i = 0; i < n; ++i) buildSet(false);
+	e = time(); time1 = getTime(e-s);
+	
+	//Build the set, print it, and time it
+	s = time(); buildSet(true); e = time();
+
+	//Print out the time it took
+	printf("Build it n times: \t%d us\n", time1);
+	printf("Built and printed: \t%d us\n", getTime(e-s));
+	printf("Total elapsed time: \t%d us\n", time1 + getTime(e-s));
 
 	//Success
 	return 0;
