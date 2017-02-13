@@ -133,6 +133,11 @@ template <> struct Add_vectors<NullType, NullType> {
 
 //Add two matrices
 template <class A, class B> struct Add_matrices {
+
+	//Check for errors
+	CHECK_LEGAL(A, B);
+
+	//Add the vectors
 	typedef List< typename AddVectors(typename A::Head, typename B::Head),
 		typename Add_matrices<typename A::Tail, typename B::Tail>::result > result;
 };
