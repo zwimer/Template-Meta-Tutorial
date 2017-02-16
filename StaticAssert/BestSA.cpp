@@ -11,7 +11,7 @@ template <bool> struct CompileTimeChecker {
 };
 
 //Specialize definition for when bool = false
-//There is no constructor here! Calling it illegal
+//There is no (non-implicit) constructor here! Calling it illegal
 template <> struct CompileTimeChecker<false> {};
 
 // Macro Wrapper
