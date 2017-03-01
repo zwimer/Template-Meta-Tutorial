@@ -16,7 +16,7 @@ template <class T, class U> struct Typelist {
 
 /* Note: The following is for C++98.
  * There is a better way to do this with C++11 !
- * With variatic arguments, we will be able to
+ * With variadic arguments, we will be able to
  * define a single function that does the job
  * of all of these macros! C++11 also allows for
  * default template arguments!
@@ -45,6 +45,7 @@ struct TypeAt<Typelist<T, U>, 0> {
 	typedef T result;
 };
 
+// Get the (i-1)'th index of the typelist U
 template<> template <class T, class U, unsigned int i>
 struct TypeAt<Typelist<T, U>, i> {
 	typedef typename TypeAt<U, i - 1>::result result;

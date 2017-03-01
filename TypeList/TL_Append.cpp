@@ -36,7 +36,7 @@ template <class T, class U> struct Typelist {
 // Below assumes no errors. If you don't like this, feel free
 // to throw in some of the static asserts you learned below!
 
-//Declare the TypeAt struct
+//Declare the Append struct
 // U is what is being appended to the typelist T
 // If T is Null and U is Null, return Null
 // If T is Null and U is not, return a typelist containing only U
@@ -55,11 +55,12 @@ template <class U> struct Append<NullType, U> {
 };
 
 //Append a typelist to a null list
-template <class T, class U> struct Append<NullType, Typelist<T, U> > {
+template <> template <class T, class U>
+struct Append<NullType, Typelist<T, U> > {
 	typedef Typelist<T, U> result;
 };
 
-// If T is not null, append T::Head to Append<T::Tail, U>
+// If T is not null, append T::Head to Append<T::Tail, U>::result
 template<> template<class Head, class Tail, class U>
 struct Append<Typelist<Head, Tail>, U> {
 	typedef Typelist<Head, typename Append<Tail, U>::result> result;

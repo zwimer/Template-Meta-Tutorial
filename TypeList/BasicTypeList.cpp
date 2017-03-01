@@ -4,8 +4,6 @@
 
 #include <iostream>
 
-//A class that denotes the end of a TL
-class NullType {};
 
 // A simple Type List
 template <class T, class U> struct Typelist {
