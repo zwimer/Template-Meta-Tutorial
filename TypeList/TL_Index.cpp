@@ -1,5 +1,5 @@
 /* Compiled with:
-	g++ TL_Index.cpp -o TL_Index.cpp
+	g++ TL_Index.cpp -o TL_Index.out
 */
 
 #include <iostream>
@@ -36,26 +36,30 @@ template <class T, class U> struct Typelist {
 // Below assumes no errors. If you don't like this, feel free
 // to throw in some of the static asserts you learned below!
 
+//Declare the TypeAt struct
+template<class T, unsigned int i> struct TypeAt;
+
 // Get the i'th index of a typelist: Base case, i = 0.
-template <class Head, class Tail>
-struct TypeAt<Typelist<Head, Tail>, 0> {
-	typedef Head Result;
+template <> template <class T, class U>
+struct TypeAt<Typelist<T, U>, 0> {
+	typedef T result;
 };
 
-template <class Head, class Tail, unsigned int i>
-struct TypeAt<Typelist<Head, Tail>, i> {
-	typedef typename TypeAt<Tail, i - 1>::Result Result;
+template<> template <class T, class U, unsigned int i>
+struct TypeAt<Typelist<T, U>, i> {
+	typedef typename TypeAt<U, i - 1>::result result;
 };
+
 
 //Main function
 int main() {
 
-	//Create a typelist of int and char
+	//Create a typelist of int, char
 	typedef TYPELIST_2(int, char) TL;
 
 	//Print out 'A' as an int and a char
-	std::cout << (typename TL::Head) 'A' << std::endl;
-	std::cout << (typename TL::Tail::Head) 'A' << std::endl;
+	std::cout << ( TypeAt<TL, 0>::result ) 'A' << std::endl;
+	std::cout << ( TypeAt<TL, 1>::result ) 'A' << std::endl;
 
 	//Success
 	return 0;

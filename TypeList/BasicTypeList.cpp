@@ -16,8 +16,8 @@ template <class T, class U> struct Typelist {
 //Main function
 int main() {
 
-	//Create a TL with an int and char
-	typedef Typelist<int, char> TL;
+	//Create a TL with a char and an int
+	typedef Typelist<char, int> TL;
 
 	//Print 'A' as a character and number
 	std::cout << (typename TL::Head) 'A' << std::endl;
