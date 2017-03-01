@@ -1,5 +1,5 @@
 /* Compiled with:
-	g++ MoreTemplateSpec.cpp -o MoreTemplateSpec.out
+	g++ IsPointer.cpp -o IsPointer.out
 */
 
 #include <iostream>
