@@ -1,4 +1,4 @@
-# C++ Template-Meta Tutorial
+# C++ Template Meta Tutorial
 This repository contains a presentation that is an introduction to C++ Template Meta Programming. All of the code in the presentation is in this repository. Much of what is shown in this presentation is no longer required to know with the increased support for template meta programming in C++11, C++14, and C++17. So why learn it? This presentation includes derivations of each of the techniques which will help get you into the mindset of template meta programming. Furthermore, while the actual code may be legacy, all of these techniques are still fundamentals and frequently used for template meta programming.
 
 ## Disclaimer
