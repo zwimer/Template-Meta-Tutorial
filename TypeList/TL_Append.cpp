@@ -71,14 +71,18 @@ struct Append<Typelist<Head, Tail>, U> {
 int main() {
 
 	//Create a typelist of char
-	typedef TYPELIST_1(char) T1;
+	typedef TYPELIST_2(char, bool) T2;
 
 	//Append an int to the end of T1
-	typedef Append<T1, int>::result T2;
+	typedef Append<T2, int>::result T3;
+
+	// Print out booleans as strings
+	std::cout << std::boolalpha;
 
 	//Print out 'A' as an int and a char
-	std::cout << ( T2::Head ) 'A' << std::endl;
-	std::cout << ( T2::Tail::Head ) 'A' << std::endl;
+	std::cout << ( T3::Head ) 'A' << std::endl;
+	std::cout << ( T3::Tail::Head ) 'A' << std::endl;
+	std::cout << ( T3::Tail::Tail::Head ) 'A' << std::endl;
 
 	//Success
 	return 0;
