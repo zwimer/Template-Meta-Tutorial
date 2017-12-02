@@ -1,6 +1,9 @@
 # C++ Template Meta Tutorial
 This repository contains a presentation that is an introduction to C++ Template Meta Programming. All of the code in the presentation is in this repository. Much of what is shown in this presentation is no longer required to know with the increased support for template meta programming in C++11, C++14, and C++17. So why learn it? This presentation includes derivations of each of the techniques which will help get you into the mindset of template meta programming. Furthermore, while the actual code may be legacy, all of these techniques are still fundamentals and frequently used for template meta programming.
 
+## Links
+A copy of the presentation is hosted [here](https://www.zwimer.com/Template-Meta-Tutorial/Presentation.pdf). The code repository is located on github [here](https://www.github.com/zwimer/Template-Meta-Tutorial/).
+
 ## Disclaimer
 C++ Template Meta is a huge and very diverse topic. It would be naive to say that this tutorial encompasses even a small portion of this topic. It is just a small introduction to some of techniques used in TMP. Furthermore, this presentation was designed to be given by someone who knows TMP. As such, while the presentation contains all necessary information, explanations may be in bullet points as it was written so that the instructor could explain each point.
 
