@@ -207,6 +207,9 @@ template<> void printMatrixHelper<NullType>() {}
 //Main function
 int main() {
 
+	// One could even make this better by using a templated function to return a variable
+	// In C++11 using hte using A = B syntax would also work!
+
 	//Make matrix A
 	typedef makeList(intc<1>, intc<2>, intc<3>) A1;
 	typedef makeList(intc<4>, intc<5>, intc<6>) A2;

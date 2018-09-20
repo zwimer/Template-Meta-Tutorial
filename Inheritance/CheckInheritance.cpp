@@ -45,9 +45,9 @@ template <class Testing, class Super> class CheckInheritance {
 
 	// Two different sized classes
 	typedef char IsConvertible;
-	class NotConvertible { char IsConvertible[2]; };
+	class NotConvertible { char IsConvertible[64]; };
 
-	// Two different test functions	
+	// Two different test functions
 	static IsConvertible Test( const Super & );
 	static NotConvertible Test( ... );
 
@@ -91,11 +91,11 @@ int main() {
 	std::cout << std::boolalpha;
 
 	// Check to see if a human is a mammal
-	std::cout << "It is " << is_subclass(Human, Human)
+	std::cout << "It is " << is_subclass(Human, Mammal)
 			<< " that a human is a mammal" << std::endl;
 
 	// Check to see if a guitar is a mammal
-	std::cout << "It is " << is_subclass(Mammal, Human) 
+	std::cout << "It is " << is_subclass(Guitar, Mammal)
 			<< " that a guitar is a mammal" << std::endl;
 
 	// Success
